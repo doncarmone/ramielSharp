@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddFastEndpoints();
 builder.Services.SwaggerDocument();
-    // .AddJWTBearerAuth("TokenSigningKey")
-    // .AddAuthorization();
+builder.Services.AddJWTBearerAuth("TokenSigningKey");
+builder.Services.AddAuthorization();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -21,8 +21,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 var app = builder.Build();
 
 
-// .UseAuthentication() 
-// .UseAuthorization()
+app.UseAuthentication(); 
+app.UseAuthorization();
 
 app.UseFastEndpoints(c =>
     { 
